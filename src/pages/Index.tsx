@@ -251,7 +251,7 @@ const Index = () => {
                       <PopoverTrigger asChild>
                         <Input
                           type="text"
-                          placeholder="Search timezone..."
+                          placeholder="Search by city, abbr, or timezone name..."
                           value={searchQuery}
                           onChange={(e) => {
                             setSearchQuery(e.target.value);
@@ -267,7 +267,7 @@ const Index = () => {
                       </PopoverTrigger>
                       <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                         <Command>
-                          <CommandInput placeholder="Search timezone..." className="h-9" value={searchQuery} onValueChange={setSearchQuery} />
+                          <CommandInput placeholder="Search by city, abbr, or timezone name..." className="h-9" value={searchQuery} onValueChange={setSearchQuery} />
                           <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
                             {Object.entries(displayedGroupedTimeZones).map(([continent, zones]) => (
@@ -360,7 +360,7 @@ const Index = () => {
                       <PopoverTrigger asChild>
                         <Input
                           type="text"
-                          placeholder="Search timezone..."
+                          placeholder="Search by city, abbr, or timezone name..."
                           value={toSearchQuery}
                           onChange={(e) => {
                             setToSearchQuery(e.target.value);
@@ -375,7 +375,7 @@ const Index = () => {
                       </PopoverTrigger>
                       <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                         <Command>
-                          <CommandInput placeholder="Search timezone..." className="h-9" value={toSearchQuery} onValueChange={setToSearchQuery} />
+                          <CommandInput placeholder="Search by city, abbr, or timezone name..." className="h-9" value={toSearchQuery} onValueChange={setToSearchQuery} />
                           <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
                             {Object.entries(displayedGroupedTimeZones).map(([continent, zones]) => (
