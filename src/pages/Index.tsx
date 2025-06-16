@@ -237,7 +237,7 @@ const Index = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-6 pb-12 max-w-4xl relative z-10">
-        <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-3xl">
+        <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-3xl overflow-hidden">
           <div className="p-8 md:p-12">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* From Section */}
@@ -270,33 +270,23 @@ const Index = () => {
                           <CommandInput placeholder="Search timezone..." className="h-9" value={searchQuery} onValueChange={setSearchQuery} />
                           <CommandList>
                             <CommandEmpty>No results found.</CommandEmpty>
-                            {Object.entries(displayedGroupedTimeZones).map(([continent, zones]) => {
-                              const filteredZones = zones.filter(zone => 
-                                zone.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                zone.abbr.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                zone.continent.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                zone.value.toLowerCase().includes(searchQuery.toLowerCase()) // Manual filter: Includes full timezone name
-                              );
-                              if (filteredZones.length === 0) return null; // Only render group if it has items
-
-                              return (
-                                <CommandGroup key={continent} heading={continent}>
-                                  {filteredZones.map((zone) => (
-                                    <CommandItem
-                                      key={zone.value}
-                                      value={zone.value} // Value for internal Radix/Command selection/navigation
-                                      onSelect={() => {
-                                        setFromZone(zone.value);
-                                        setIsFromDropdownOpen(false); // Close dropdown on select
-                                        setSearchQuery(zone.label); // Set input to selected label
-                                      }}
-                                    >
-                                      {zone.label} ({zone.abbr})
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              );
-                            })}
+                            {Object.entries(displayedGroupedTimeZones).map(([continent, zones]) => (
+                              <CommandGroup key={continent} heading={continent}>
+                                {zones.map((zone) => (
+                                  <CommandItem
+                                    key={zone.value}
+                                    value={`${zone.label} ${zone.abbr} ${zone.continent} ${zone.value}`.toLowerCase()}
+                                    onSelect={() => {
+                                      setFromZone(zone.value);
+                                      setIsFromDropdownOpen(false); // Close dropdown on select
+                                      setSearchQuery(zone.label); // Set input to selected label
+                                    }}
+                                  >
+                                    {zone.label} ({zone.abbr})
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            ))}
                           </CommandList>
                         </Command>
                       </PopoverContent>
