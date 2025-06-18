@@ -1,3 +1,7 @@
+@import "@fontsource/inter/index.css";
+@import "@fontsource/manrope/index.css";
+@import "@fontsource/geist-mono/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,6 +102,48 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utilities */
+  .glass {
+    @apply backdrop-blur-xl border border-white/20 bg-white/10;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl border border-white/10 bg-black/10;
+  }
+
+  /* Modern card styles */
+  .card-modern {
+    @apply relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm;
+  }
+
+  .card-glass {
+    @apply glass shadow-glass rounded-2xl;
+  }
+
+  /* Interactive elements */
+  .btn-glass {
+    @apply glass hover:bg-white/20 transition-all duration-300 rounded-xl px-4 py-2;
+  }
+
+  .time-card {
+    @apply w-full min-h-[180px] flex flex-col justify-between p-6 rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm hover:shadow-soft transition-all duration-300;
+  }
+
+  /* Smooth animations */
+  .animate-in {
+    @apply animate-fade-in;
+  }
+
+  .animate-up {
+    @apply animate-slide-up;
   }
 }
