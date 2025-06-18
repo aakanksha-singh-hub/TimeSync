@@ -222,8 +222,6 @@
 .light {
   color-scheme: light;
 }
-<<<<<<< HEAD
-=======
 
 /* Widget-specific light/dark themes */
 .widget-light {
@@ -263,4 +261,3 @@
   color: #555 !important;
   opacity: 0.7 !important;
 }
->>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)

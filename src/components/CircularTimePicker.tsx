@@ -6,10 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Clock, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-<<<<<<< HEAD
-=======
 import { Input } from "@/components/ui/input";
->>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
 
 interface CircularTimePickerProps {
   value: { hours: number; minutes: number };
@@ -124,161 +121,6 @@ const CircularTimePicker: React.FC<CircularTimePickerProps> = ({
     });
   };
 
-<<<<<<< HEAD
-  return (
-    <Card className={cn("w-full max-w-md mx-auto", className)}>
-      <CardHeader className="pb-4">
-        <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-primary" />
-            <span>Set Time</span>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={resetToCurrentTime}
-            className="text-xs gap-1"
-          >
-            <RotateCcw className="w-3 h-3" />
-            Now
-          </Button>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Time Display */}
-        <div className="text-center">
-          <motion.div
-            className="font-mono text-4xl font-bold mb-2"
-            key={formatTime()}
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            {formatTime()}
-            {!is24Hour && (
-              <span className="text-2xl ml-2 text-muted-foreground">
-                {amPm}
-              </span>
-            )}
-          </motion.div>
-
-          {/* 24h Toggle */}
-          {onToggle24Hour && (
-            <div className="flex items-center justify-center gap-3 text-sm">
-              <Label htmlFor="24hour" className="cursor-pointer">
-                24-hour format
-              </Label>
-              <Switch
-                id="24hour"
-                checked={is24Hour}
-                onCheckedChange={onToggle24Hour}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Mode Selector */}
-        <div className="grid grid-cols-2 gap-2">
-          <Button
-            variant={mode === "hours" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setMode("hours")}
-            className="relative"
-          >
-            Hours
-            {mode === "hours" && (
-              <motion.div
-                className="absolute inset-0 bg-primary rounded-md"
-                layoutId="mode-indicator"
-                initial={false}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-            )}
-            <span className="relative z-10">Hours</span>
-          </Button>
-          <Button
-            variant={mode === "minutes" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setMode("minutes")}
-            className="relative"
-          >
-            <span className="relative z-10">Minutes</span>
-          </Button>
-        </div>
-
-        {/* Circular Clock */}
-        <div className="flex justify-center">
-          <div className="relative w-64 h-64">
-            <div
-              ref={clockRef}
-              className="w-full h-full rounded-full border-2 border-primary/20 bg-gradient-to-br from-muted/30 to-muted/10 relative shadow-inner"
-            >
-              {/* Clock center dot */}
-              <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 -translate-y-1/2 z-20 shadow-lg" />
-
-              {/* Clock hand */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 origin-bottom bg-primary rounded-full z-10 shadow-lg"
-                style={{
-                  width: "3px",
-                  height: "75px",
-                  transform: `translate(-50%, -100%) rotate(${
-                    mode === "hours"
-                      ? getAngle(
-                          is24Hour ? value.hours : display12Hour,
-                          is24Hour ? 24 : 12
-                        )
-                      : getAngle(Math.floor(value.minutes / 5), 12)
-                  }deg)`,
-                }}
-                animate={{
-                  rotate:
-                    mode === "hours"
-                      ? getAngle(
-                          is24Hour ? value.hours : display12Hour,
-                          is24Hour ? 24 : 12
-                        )
-                      : getAngle(Math.floor(value.minutes / 5), 12),
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-
-              {/* Numbers */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                {generateNumbers()}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* AM/PM Selector for 12-hour format */}
-        {!is24Hour && (
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant={amPm === "AM" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAmPmToggle("AM")}
-            >
-              AM
-            </Button>
-            <Button
-              variant={amPm === "PM" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAmPmToggle("PM")}
-            >
-              PM
-            </Button>
-          </div>
-        )}
-
-        {/* Instructions */}
-        <div className="text-center text-sm text-muted-foreground">
-          <p>
-            {mode === "hours"
-              ? "Select hour, then minutes will auto-open"
-              : "Select minutes in 5-minute increments"}
-          </p>
-=======
   const [localDate, setLocalDate] = useState(() => {
     const now = new Date();
     now.setHours(value.hours, value.minutes, 0, 0);
@@ -339,7 +181,6 @@ const CircularTimePicker: React.FC<CircularTimePickerProps> = ({
               className="mt-1"
             />
           </div>
->>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
         </div>
       </CardContent>
     </Card>

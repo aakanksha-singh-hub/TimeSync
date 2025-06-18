@@ -420,55 +420,6 @@ const Landing: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-6 py-20">
-        <motion.div
-          className="text-center max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.4, duration: 0.6 }}
-        >
-          <div className="p-12 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to sync the world?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of users who trust TimeSync for their global time
-              needs. Start creating beautiful world clock widgets today.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="text-lg px-8 py-4 bg-gradient-to-r from-primary to-primary/90"
-              >
-                <Link to="/app" className="flex items-center space-x-2">
-                  <Globe className="h-5 w-5" />
-                  <span>Start Now - It's Free</span>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 py-4"
-                asChild
-              >
-                <a
-                  href="https://github.com/yourusername/timesync"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  <span>View on GitHub</span>
-                </a>
-              </Button>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
       {/* Footer */}
       <footer className="border-t border-border/50 py-12">
         <div className="container mx-auto px-6">
@@ -478,7 +429,7 @@ const Landing: React.FC = () => {
               <span className="text-lg font-semibold">TimeSync</span>
             </div>
             <div className="text-muted-foreground text-sm">
-              © 2024 TimeSync. Built with ❤️ for global teams.
+              © 2025 TimeSync. Built with ❤️ for developers.
             </div>
           </div>
         </div>
