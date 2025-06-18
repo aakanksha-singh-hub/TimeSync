@@ -47,7 +47,11 @@ interface EmbedConfig {
   customTime?: DateTime;
   useCurrentTime: boolean;
   theme: "light" | "dark";
+<<<<<<< HEAD
   size: "small" | "medium" | "large" | "full-width";
+=======
+  size: "small" | "medium" | "large";
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
 }
 
 const EmbedGeneratorPage: React.FC = () => {
@@ -92,6 +96,7 @@ const EmbedGeneratorPage: React.FC = () => {
       icon: Monitor,
       maxCities: 6,
     },
+<<<<<<< HEAD
     "full-width": {
       name: "Full Width",
       description: "Responsive full-width widget",
@@ -100,6 +105,8 @@ const EmbedGeneratorPage: React.FC = () => {
       icon: Monitor,
       maxCities: 8,
     },
+=======
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
   };
 
   const updateConfig = <K extends keyof EmbedConfig>(

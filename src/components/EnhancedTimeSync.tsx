@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { cities, type City } from "@/data/cities";
 import CitySearch from "./CitySearch";
+import EnhancedDateTimePicker from "./EnhancedDateTimePicker";
 
 interface ConversionResult {
   sourceCity: City;
@@ -35,18 +36,13 @@ const EnhancedTimeSync: React.FC = () => {
   const [targetCity, setTargetCity] = useState<City>(
     cities.find((c) => c.id === "new-york") || cities[1]
   );
-  const [currentTime, setCurrentTime] = useState(DateTime.now());
+  const [useCurrentTime, setUseCurrentTime] = useState(true);
+  const [customDateTime, setCustomDateTime] = useState(DateTime.now());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(DateTime.now());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const effectiveTime = useCurrentTime ? DateTime.now() : customDateTime;
 
   const getConversion = (): ConversionResult => {
-    const sourceTime = currentTime.setZone(sourceCity.timezone);
+    const sourceTime = effectiveTime.setZone(sourceCity.timezone);
     const targetTime = sourceTime.setZone(targetCity.timezone);
 
     return {
@@ -151,8 +147,8 @@ END:VCALENDAR`;
         >
           <div className="flex items-center gap-4">
             <Link to="/">
-              <Button variant="ghost" size="sm" className="gap-2">
-                <Home className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="gap-2 text-2xl font-bold">
+                <Home className="h-10 w-10" />
                 Home
               </Button>
             </Link>
@@ -177,17 +173,39 @@ END:VCALENDAR`;
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="grid md:grid-cols-2 gap-6 relative"
+            className="grid md:grid-cols-2 gap-6 relative h-full"
           >
             {/* FROM Section */}
-            <Card className="relative overflow-hidden">
+            <Card className="relative overflow-hidden h-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-muted-foreground">
                   <Globe className="h-4 w-4" />
                   FROM
                 </CardTitle>
+                {/* Compact time toggle and picker */}
+                <div className="flex flex-col gap-1 mt-2">
+                  <label className="font-normal text-xs flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={useCurrentTime}
+                      onChange={e => setUseCurrentTime(e.target.checked)}
+                      className="accent-primary scale-90"
+                    />
+                    Use current time
+                  </label>
+                  {!useCurrentTime && (
+                    <EnhancedDateTimePicker
+                      value={customDateTime}
+                      onChange={setCustomDateTime}
+                      timezone={sourceCity.timezone}
+                      is24HourFormat={true}
+                      label={undefined}
+                      className="p-2 text-xs"
+                    />
+                  )}
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex-1 flex flex-col justify-between">
                 <CitySearch
                   value={sourceCity}
                   onChange={(city) => city && setSourceCity(city)}
@@ -250,14 +268,16 @@ END:VCALENDAR`;
             </div>
 
             {/* TO Section */}
-            <Card className="relative overflow-hidden">
+            <Card className="relative overflow-hidden h-full flex flex-col">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-muted-foreground">
                   <Globe className="h-4 w-4" />
                   TO
                 </CardTitle>
+                {/* Spacer to align with FROM card's toggle */}
+                <div style={{ height: '28px' }} />
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 flex-1 flex flex-col justify-between">
                 <CitySearch
                   value={targetCity}
                   onChange={(city) => city && setTargetCity(city)}

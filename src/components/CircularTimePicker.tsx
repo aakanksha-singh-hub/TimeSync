@@ -6,6 +6,10 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Clock, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
+<<<<<<< HEAD
+=======
+import { Input } from "@/components/ui/input";
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
 
 interface CircularTimePickerProps {
   value: { hours: number; minutes: number };
@@ -120,6 +124,7 @@ const CircularTimePicker: React.FC<CircularTimePickerProps> = ({
     });
   };
 
+<<<<<<< HEAD
   return (
     <Card className={cn("w-full max-w-md mx-auto", className)}>
       <CardHeader className="pb-4">
@@ -273,6 +278,68 @@ const CircularTimePicker: React.FC<CircularTimePickerProps> = ({
               ? "Select hour, then minutes will auto-open"
               : "Select minutes in 5-minute increments"}
           </p>
+=======
+  const [localDate, setLocalDate] = useState(() => {
+    const now = new Date();
+    now.setHours(value.hours, value.minutes, 0, 0);
+    return now;
+  });
+
+  useEffect(() => {
+    // Sync localDate when value changes from outside
+    const newDate = new Date(localDate);
+    newDate.setHours(value.hours, value.minutes, 0, 0);
+    setLocalDate(newDate);
+    // eslint-disable-next-line
+  }, [value.hours, value.minutes]);
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = new Date(e.target.value + 'T' + formatTime());
+    setLocalDate(newDate);
+    onChange({ hours: newDate.getHours(), minutes: newDate.getMinutes() });
+  };
+
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [hours, minutes] = e.target.value.split(":").map(Number);
+    const newDate = new Date(localDate);
+    newDate.setHours(hours, minutes, 0, 0);
+    setLocalDate(newDate);
+    onChange({ hours, minutes });
+  };
+
+  const formatDate = () => {
+    return localDate.toISOString().slice(0, 10);
+  };
+
+  return (
+    <Card className={cn("w-full max-w-md mx-auto", className)}>
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2">
+          <Clock className="w-5 h-5 text-primary" />
+          <span>Set Date & Time</span>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex flex-col gap-4">
+          <div>
+            <Label>Date</Label>
+            <Input
+              type="date"
+              value={formatDate()}
+              onChange={handleDateChange}
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label>Time</Label>
+            <Input
+              type="time"
+              value={formatTime()}
+              onChange={handleTimeChange}
+              className="mt-1"
+            />
+          </div>
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
         </div>
       </CardContent>
     </Card>

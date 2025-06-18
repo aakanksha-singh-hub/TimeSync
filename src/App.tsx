@@ -14,6 +14,10 @@ import Landing from "@/pages/Landing";
 import EnhancedTimeSync from "@/components/EnhancedTimeSync";
 import EmbedPage from "@/pages/EmbedPage";
 import EmbedGeneratorPage from "@/pages/EmbedGenerator";
+<<<<<<< HEAD
+=======
+import ThemeToggle from "@/components/ThemeToggle";
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
 import "./App.css";
 
 // Theme sync component to connect store with theme provider
@@ -34,7 +38,15 @@ function App() {
       <ThemeProvider defaultTheme="system" storageKey="timesync-theme">
         <div className="min-h-screen bg-background text-foreground">
           <Router>
+<<<<<<< HEAD
             <ThemeSync />
+=======
+            {/* <ThemeSync /> */}
+            {/* Top bar with centered ThemeToggle */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px 0' }}>
+              <ThemeToggle />
+            </div>
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
             <Routes>
               {/* Landing page as default */}
               <Route path="/" element={<Landing />} />

@@ -239,6 +239,7 @@ const EnhancedDateTimePicker: React.FC<EnhancedDateTimePickerProps> = ({
             {showSeconds && (is24HourFormat ? ":SS" : ":SS")}
           </div>
         </div>
+<<<<<<< HEAD
 
         {/* Live Time Display */}
         <motion.div
@@ -288,6 +289,8 @@ const EnhancedDateTimePicker: React.FC<EnhancedDateTimePickerProps> = ({
             ))}
           </div>
         </div>
+=======
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
       </CardContent>
     </Card>
   );

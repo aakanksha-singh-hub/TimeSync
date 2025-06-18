@@ -247,6 +247,7 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config, isLive }) => {
   }
 
   return (
+<<<<<<< HEAD
     <div
       className={cn(
         "w-full h-full min-w-0 border border-border/60 rounded-2xl bg-gradient-to-br from-background via-background/98 to-muted/20 backdrop-blur-xl shadow-2xl shadow-primary/5",
@@ -507,6 +508,270 @@ const WidgetPreview: React.FC<WidgetPreviewProps> = ({ config, isLive }) => {
             </div>
           </motion.div>
         )}
+=======
+    <div className={`widget-${config.theme}`}>
+      <div
+        className={cn(
+          "w-full h-full min-w-0 border border-border/60 rounded-2xl bg-gradient-to-br from-background via-background/98 to-muted/20 backdrop-blur-xl shadow-2xl shadow-primary/5",
+          sizeConfig.minHeight,
+          "relative overflow-hidden transition-all duration-500 hover:shadow-3xl hover:shadow-primary/10",
+          config.theme === "dark" ? "dark" : "",
+          "flex flex-col"
+        )}
+        style={{
+          minHeight: config.size === "full" ? "200px" : undefined,
+          maxHeight: "100vh",
+        }}
+      >
+        {/* Sophisticated background pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.15),transparent_50%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(120,119,198,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(99,102,241,0.1),transparent_40%)] dark:bg-[radial-gradient(ellipse_at_bottom_right,rgba(99,102,241,0.05),transparent_40%)]" />
+          <div className="absolute inset-0 bg-grid-white/[0.015] bg-grid-black/[0.02] dark:bg-grid-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,white_50%,transparent_80%)]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/[0.02] dark:to-primary/[0.01]" />
+        </div>
+
+        {/* Live indicator with enhanced design */}
+        {isLive && config.useCurrentTime && (
+          <motion.div
+            className="absolute top-5 right-5 z-20"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+          >
+            <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 backdrop-blur-sm border border-emerald-500/20 shadow-lg shadow-emerald-500/10">
+              <motion.div
+                className="w-2.5 h-2.5 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full shadow-sm"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                Live
+              </span>
+            </div>
+          </motion.div>
+        )}
+
+        <div
+          className={cn("flex-1 relative z-10 flex flex-col", sizeConfig.padding)}
+        >
+          {/* Premium Header Design */}
+          <motion.div
+            className="flex items-center justify-between mb-4 lg:mb-6 flex-shrink-0"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary via-primary to-primary/90 flex items-center justify-center shadow-xl shadow-primary/25">
+                  <Clock
+                    className={cn("text-primary-foreground", sizeConfig.iconSize)}
+                  />
+                </div>
+                <div className="absolute -inset-1 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl blur-sm -z-10" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="font-bold text-foreground tracking-tight">
+                  TimeSync
+                </h3>
+                <p className="text-xs text-muted-foreground font-medium">
+                  World Clock Widget
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {!config.useCurrentTime && config.customTime && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border border-blue-500/20 shadow-sm">
+                    <Calendar className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                    <span className="text-xs font-semibold text-blue-700 dark:text-blue-400">
+                      {config.customTime.toFormat("MMM d")}
+                    </span>
+                  </div>
+                </motion.div>
+              )}
+              {config.showTimeDifference && config.referenceCity && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 via-violet-500/10 to-fuchsia-500/10 border border-purple-500/20 shadow-sm">
+                    <Target className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
+                    <span className="text-xs font-semibold text-purple-700 dark:text-purple-400">
+                      vs {config.referenceCity.name}
+                    </span>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Beautiful Cities Grid */}
+          <div
+            className={cn(
+              "grid flex-1 min-h-0",
+              getGridLayout(),
+              sizeConfig.spacing,
+              "content-start"
+            )}
+          >
+            {citiesToShow.map((city, index) => {
+              const timeInfo = getTimeInfo(city.timezone);
+
+              return (
+                <motion.div
+                  key={city.id}
+                  className="group relative"
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    delay: index * 0.15 + 0.3,
+                    type: "spring",
+                    stiffness: 120,
+                    damping: 20,
+                  }}
+                >
+                  <div
+                    className={cn(
+                      "relative h-full p-5 rounded-2xl transition-all duration-500 cursor-default",
+                      "bg-gradient-to-br from-background/90 via-background/70 to-muted/40",
+                      "border border-border/60 backdrop-blur-xl",
+                      "hover:shadow-2xl hover:shadow-primary/15 hover:border-border/90",
+                      "hover:bg-gradient-to-br hover:from-background/95 hover:via-background/80 hover:to-muted/50",
+                      "group-hover:scale-[1.03] group-hover:-translate-y-3",
+                      "before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/[0.05] before:via-transparent before:to-white/[0.02] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500",
+                      "after:absolute after:inset-0 after:rounded-2xl after:bg-gradient-to-br after:from-primary/[0.02] after:via-transparent after:to-primary/[0.05] after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-500"
+                    )}
+                  >
+                    {/* City Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <motion.span
+                          className="text-2xl leading-none"
+                          whileHover={{ scale: 1.2 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          {city.flag}
+                        </motion.span>
+                        <div className="min-w-0 flex-1 space-y-1">
+                          <h4
+                            className={cn(
+                              "font-bold text-foreground leading-tight truncate",
+                              sizeConfig.citySize
+                            )}
+                          >
+                            {city.name}
+                          </h4>
+                          <p className="text-xs text-muted-foreground/80 truncate font-medium">
+                            {city.country}
+                          </p>
+                        </div>
+                      </div>
+
+                      {timeInfo.timeDiff && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + 0.5 }}
+                        >
+                          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-muted/60 to-muted/40 border border-border/40 shadow-sm">
+                            <span className="text-xs font-bold text-muted-foreground">
+                              {timeInfo.timeDiff}
+                            </span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Time Display - The Star */}
+                    <div className="space-y-3">
+                      <motion.div
+                        className={cn(
+                          "relative font-mono font-black text-foreground tracking-tight leading-none",
+                          sizeConfig.timeSize
+                        )}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.1 + 0.6 }}
+                      >
+                        <span className="relative z-10 bg-gradient-to-br from-foreground via-foreground to-foreground/90 bg-clip-text text-transparent">
+                          {timeInfo.time}
+                        </span>
+                        {/* Subtle glow effect for premium feel */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </motion.div>
+
+                      {timeInfo.date && (
+                        <motion.div
+                          className="flex items-center gap-3 text-xs text-muted-foreground"
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 + 0.7 }}
+                        >
+                          <span className="font-semibold">{timeInfo.date}</span>
+                          <div className="w-1 h-1 bg-muted-foreground/40 rounded-full" />
+                          <span className="font-mono font-medium opacity-70">
+                            {timeInfo.offset}
+                          </span>
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Subtle hover gradient overlay */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
+
+                    {/* Border glow effect on hover */}
+                    <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 blur-sm" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Floating Reference Time (Enhanced) */}
+          {config.showTimeDifference && config.referenceCity && (
+            <motion.div
+              className="absolute bottom-5 left-5 right-5"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              <div className="relative">
+                <div className="flex items-center justify-center gap-4 px-8 py-4 rounded-2xl bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-2xl border border-border/70 shadow-2xl shadow-primary/10">
+                  <motion.span
+                    className="text-xl"
+                    whileHover={{ scale: 1.2, rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {config.referenceCity.flag}
+                  </motion.span>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-bold text-sm text-foreground/90">
+                      Reference
+                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">
+                      {config.referenceCity.name}
+                    </span>
+                  </div>
+                  <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary/60 to-primary/40 rounded-full shadow-sm" />
+                  <span className="text-sm font-mono font-bold text-foreground bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                    {formatTime(displayTime, config.referenceCity.timezone)}
+                  </span>
+                </div>
+                {/* Subtle glow around reference time */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 blur-xl -z-10 opacity-50" />
+              </div>
+            </motion.div>
+          )}
+        </div>
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
       </div>
     </div>
   );
@@ -574,8 +839,18 @@ const EmbedWidget: React.FC = () => {
 
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+<<<<<<< HEAD
     } else {
       document.documentElement.classList.remove("dark");
+=======
+      document.documentElement.classList.remove("light");
+    } else if (theme === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("light");
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
     }
 
     let interval: NodeJS.Timeout;

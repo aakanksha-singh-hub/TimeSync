@@ -61,9 +61,12 @@ const Landing: React.FC = () => {
             <span className="text-2xl font-bold">TimeSync</span>
           </div>
           <div className="flex items-center space-x-4">
+<<<<<<< HEAD
             <Button variant="ghost" asChild>
               <Link to="/app">Dashboard</Link>
             </Button>
+=======
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
             <Button asChild>
               <Link to="/app">Try Now</Link>
             </Button>
@@ -318,7 +321,10 @@ const Landing: React.FC = () => {
                 "Generate beautiful iframe widgets in multiple sizes with responsive design",
               features: [
                 "Responsive design",
+<<<<<<< HEAD
                 "Multiple sizes",
+=======
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
                 "One-click embed",
               ],
             },
@@ -350,7 +356,10 @@ const Landing: React.FC = () => {
                 "Light and dark themes with customizable colors and layouts",
               features: [
                 "Light/Dark themes",
+<<<<<<< HEAD
                 "Custom colors",
+=======
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
                 "Multiple layouts",
               ],
             },

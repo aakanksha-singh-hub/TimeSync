@@ -222,3 +222,45 @@
 .light {
   color-scheme: light;
 }
+<<<<<<< HEAD
+=======
+
+/* Widget-specific light/dark themes */
+.widget-light {
+  background: #fff !important;
+  color: #111 !important;
+}
+.widget-light .card,
+.widget-light .bg-background,
+.widget-light .rounded-2xl,
+.widget-light .border {
+  background: #fff !important;
+  color: #111 !important;
+  border-color: #e5e7eb !important;
+}
+.widget-dark {
+  background: #18181b !important;
+  color: #f4f4f5 !important;
+}
+.widget-dark .card,
+.widget-dark .bg-background,
+.widget-dark .rounded-2xl,
+.widget-dark .border {
+  background: #23232a !important;
+  color: #f4f4f5 !important;
+  border-color: #27272a !important;
+}
+
+.widget-light .text-primary,
+.widget-light .text-foreground,
+.widget-light .font-bold,
+.widget-light .font-mono,
+.widget-light .font-light {
+  color: #111 !important;
+  opacity: 1 !important;
+}
+.widget-light .text-muted-foreground {
+  color: #555 !important;
+  opacity: 0.7 !important;
+}
+>>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
