@@ -239,58 +239,6 @@ const EnhancedDateTimePicker: React.FC<EnhancedDateTimePickerProps> = ({
             {showSeconds && (is24HourFormat ? ":SS" : ":SS")}
           </div>
         </div>
-<<<<<<< HEAD
-
-        {/* Live Time Display */}
-        <motion.div
-          className="p-4 rounded-lg bg-muted/30 border border-border/50"
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="text-center">
-            <div className="text-sm text-muted-foreground mb-1">
-              Selected Time
-            </div>
-            <motion.div
-              className="font-mono text-2xl font-bold text-primary"
-              key={timeInput}
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              {timeInput}
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Quick Time Presets */}
-        <div className="space-y-2">
-          <Label className="text-sm font-medium">Quick Set</Label>
-          <div className="grid grid-cols-2 gap-2">
-            {[
-              { label: "9:00 AM", time: { hour: 9, minute: 0 } },
-              { label: "12:00 PM", time: { hour: 12, minute: 0 } },
-              { label: "3:00 PM", time: { hour: 15, minute: 0 } },
-              { label: "6:00 PM", time: { hour: 18, minute: 0 } },
-            ].map((preset) => (
-              <Button
-                key={preset.label}
-                variant="outline"
-                size="sm"
-                disabled={disabled}
-                onClick={() => {
-                  const newTime = localDateTime.set(preset.time);
-                  onChange(newTime);
-                }}
-                className="text-xs"
-              >
-                {preset.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-=======
->>>>>>> 560aac6 (UI fixes: theme toggle, card alignment, icon sizing, header improvements, and git setup)
       </CardContent>
     </Card>
   );
