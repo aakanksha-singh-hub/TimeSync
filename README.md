@@ -6,8 +6,6 @@
 [![GitHub](https://img.shields.io/github/stars/yourusername/timesync?style=for-the-badge)](https://github.com/yourusername/timesync)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 
-![TimeSync Hero](https://time-sync-sigma.vercel.app/og-image.png)
-
 ## 🚀 Features
 
 ### 🧭 **Core Features**
