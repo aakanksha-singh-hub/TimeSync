@@ -104,3 +104,22 @@ export const createMeetingEvent = (
     location: "Video Conference",
   };
 };
+
+export const exportToCalendar = async (
+  event: CalendarEvent,
+  type: 'google' | 'outlook' | 'ics'
+) => {
+  switch (type) {
+    case 'google':
+      window.open(generateGoogleCalendarUrl(event), '_blank');
+      break;
+    case 'outlook':
+      window.open(generateOutlookUrl(event), '_blank');
+      break;
+    case 'ics':
+      downloadICSFile(event);
+      break;
+    default:
+      throw new Error(`Unsupported calendar type: ${type}`);
+  }
+};

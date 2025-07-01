@@ -1,23 +1,31 @@
-# TimeSync - World Clock Widgets
+# TimeSync Core - Streamlined World Clock & Widgets
 
-Create embeddable world clock widgets with time zone conversion, real-time updates, and calendar integration. Perfect for blogs, Notion, and websites.
+A clean, focused world clock application with timezone conversion and embeddable widgets. Built for developers who need essential timezone features without bloat.
 
 [Live Demo](https://time-sync-sigma.vercel.app)
 
-## Features
+## 🌍 Core Features
 
-- Search for any city
-- Real-time time zone comparison
-- Shareable widgets (iframe)
-- Calendar export (Google, Outlook, ICS)
-- Light, dark, and auto themes (toggle in top bar)
-- Mobile responsive
-- Manual date and time input for custom conversions
+### World Clock + Time Conversion
+- **Multiple timezone support** - Compare times across cities worldwide
+- **Real-time updates** - Live clock with automatic refresh
+- **12/24 hour toggle** - Flexible time format options  
+- **Manual date/time input** - Custom time conversion for planning
+
+### Widget Generator
+- **Embed code (iframe)** - Copy-paste ready for websites
+- **Size/theme customization** - Small, medium, large with light/dark themes
+- **Shareable URLs** - Direct links for easy sharing
+
+### Calendar Integration
+- **Export to Google Calendar** - One-click calendar events
+- **Export to Outlook** - Microsoft calendar support
+- **ICS download** - Universal calendar file format
 
 ## Quick Start
 
 ### Use Online
-Go to [time-sync-sigma.vercel.app](https://time-sync-sigma.vercel.app) to create widgets instantly.
+Visit [time-sync-sigma.vercel.app](https://time-sync-sigma.vercel.app) to start converting times instantly.
 
 ### Embed a Widget
 ```html
@@ -32,22 +40,48 @@ Go to [time-sync-sigma.vercel.app](https://time-sync-sigma.vercel.app) to create
 
 ### Run Locally
 ```bash
-git clone https://github.com/yourusername/timesync.git
+git clone <repository-url>
 cd timesync
 npm install
 npm run dev
 ```
 
-## Widget Options
+## Widget Parameters
 
-| Parameter     | Description                    | Values                        | Default                 |
-| ------------- | ------------------------------ | ----------------------------- | ----------------------- |
-| `cities`      | Comma-separated city names/IDs | `New+York,London,Tokyo`       | `new-york,london,tokyo` |
-| `theme`       | Widget theme                   | `light`, `dark`, `auto`       | `auto`                  |
-| `size`        | Widget size preset             | `small`, `medium`, `large`    | `medium`                |
-| `time`        | Custom time (ISO format)       | `2025-07-07T14:00Z`           | current time            |
-| `show24Hour`  | 24-hour format                 | `true`, `false`               | `true`                  |
-| `showSeconds` | Include seconds                | `true`, `false`               | `false`                 |
+| Parameter     | Values                        | Default                 |
+| ------------- | ----------------------------- | ----------------------- |
+| `cities`      | `New+York,London,Tokyo`       | `New+York,London`       |
+| `theme`       | `light`, `dark`, `auto`       | `auto`                  |
+| `size`        | `small`, `medium`, `large`    | `medium`                |
+| `time`        | `2025-07-07T14:00Z`           | current time            |
+| `show24Hour`  | `true`, `false`               | `true`                  |
+| `showSeconds` | `true`, `false`               | `false`                 |
+
+## Widget Sizes
+
+| Size    | Dimensions | Max Cities | Best For             |
+| ------- | ---------- | ---------- | -------------------- |
+| Small   | 300×180px  | 2          | Sidebars, cards      |
+| Medium  | 500×250px  | 4          | Blog posts, articles |
+| Large   | 700×350px  | 6          | Main content         |
+
+## Tech Stack
+- React 18 + TypeScript
+- Tailwind CSS  
+- Luxon (timezone handling)
+- Radix UI components
+- Vite (build tool)
+
+## Contributing
+
+```bash
+git clone <repository-url>
+cd timesync
+npm install
+npm run dev
+```
+
+© 2025 TimeSync Core. Focused on what matters.
 
 **Example URLs:**
 - Basic: `.../embed?cities=New+York,London,Tokyo`

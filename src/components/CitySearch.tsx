@@ -13,7 +13,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -44,8 +43,6 @@ const CitySearch: React.FC<CitySearchProps> = ({
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCities, setFilteredCities] = useState<City[]>([]);
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Initialize Fuse.js for fuzzy search
   const fuse = new Fuse(findCitiesByQuery(""), {
@@ -70,38 +67,7 @@ const CitySearch: React.FC<CitySearchProps> = ({
 
     const results = fuse.search(searchQuery);
     setFilteredCities(results.map((result) => result.item).slice(0, 20));
-    setHighlightedIndex(0);
   }, [searchQuery]);
-
-  // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!open) return;
-
-    switch (e.key) {
-      case "ArrowDown":
-        e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev < filteredCities.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case "ArrowUp":
-        e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev > 0 ? prev - 1 : filteredCities.length - 1
-        );
-        break;
-      case "Enter":
-        e.preventDefault();
-        if (filteredCities[highlightedIndex]) {
-          handleCitySelect(filteredCities[highlightedIndex]);
-        }
-        break;
-      case "Escape":
-        setOpen(false);
-        inputRef.current?.blur();
-        break;
-    }
-  };
 
   const handleCitySelect = (city: City) => {
     onChange(city);
@@ -128,9 +94,6 @@ const CitySearch: React.FC<CitySearchProps> = ({
               {value.country}
             </div>
           </div>
-          <Badge variant="secondary" className="text-xs font-mono">
-            {value.countryCode}
-          </Badge>
         </div>
       );
     }
@@ -174,82 +137,78 @@ const CitySearch: React.FC<CitySearchProps> = ({
               disabled && "opacity-50 cursor-not-allowed"
             )}
             disabled={disabled}
-            onClick={() => !disabled && setOpen(true)}
+            onClick={() => !disabled && setOpen(!open)}
           >
             {getDisplayValue()}
-            <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronDownIcon className={cn("ml-2 h-4 w-4 shrink-0 opacity-50 transition-transform", open && "rotate-180")} />
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          className="w-[var(--radix-popover-trigger-width)] p-0"
-          align="start"
-          side="bottom"
-        >
-          <Command>
-            <CommandInput
-              ref={inputRef}
-              placeholder="Type to search cities..."
-              value={searchQuery}
-              onValueChange={setSearchQuery}
-              onKeyDown={handleKeyDown}
-            />
-            <CommandList className="max-h-[300px] overflow-y-auto">
-              {filteredCities.length === 0 ? (
-                <CommandEmpty className="py-6 text-center text-sm">
-                  <MapPinIcon className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
-                  No cities found.
-                  <div className="text-xs text-muted-foreground mt-1">
-                    Try searching by city name, country, or timezone
-                  </div>
-                </CommandEmpty>
-              ) : (
-                Object.entries(groupedCities).map(([continent, cities]) => (
-                  <CommandGroup key={continent} heading={continent}>
-                    {cities.map((city, index) => {
-                      const globalIndex = filteredCities.indexOf(city);
-                      const isHighlighted = globalIndex === highlightedIndex;
-                      return (
-                        <CommandItem
-                          key={city.id}
-                          value={city.id}
-                          onSelect={() => handleCitySelect(city)}
-                          className={cn(
-                            "flex items-center justify-between p-3 cursor-pointer",
-                            isHighlighted && "bg-accent"
-                          )}
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <span className="text-lg flex-shrink-0">
-                              {city.flag}
-                            </span>
-                            <div className="flex-1 min-w-0">
-                              <div className="font-medium text-sm truncate">
-                                {city.name}
-                              </div>
-                              <div className="text-xs text-muted-foreground truncate">
-                                {city.country} •{" "}
-                                {formatTimeOffset(city.timezone)}
+        {open && (
+          <PopoverContent
+            className="w-[var(--radix-popover-trigger-width)] p-0 bg-card border shadow-lg"
+            align="start"
+            side="bottom"
+            onInteractOutside={() => setOpen(false)}
+          >
+            <div className="bg-card">
+              <Command className="bg-card border-0">
+                <div className="flex items-center border-b px-3 bg-card">
+                  <SearchIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                  <input
+                    placeholder="Type to search cities..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex h-11 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground"
+                    autoFocus
+                  />
+                </div>
+                <div className="max-h-[300px] overflow-y-auto p-1 bg-card">
+                  {filteredCities.length === 0 ? (
+                    <div className="py-6 text-center text-sm text-muted-foreground">
+                      <MapPinIcon className="mx-auto h-8 w-8 mb-2 opacity-50" />
+                      No cities found.
+                      <div className="text-xs mt-1">
+                        Try searching by city name, country, or timezone
+                      </div>
+                    </div>
+                  ) : (
+                    Object.entries(groupedCities).map(([continent, cities]) => (
+                      <div key={continent} className="mb-2">
+                        <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                          {continent}
+                        </div>
+                        {cities.map((city) => (
+                          <div
+                            key={city.id}
+                            onClick={() => handleCitySelect(city)}
+                            className="flex items-center justify-between p-3 cursor-pointer hover:bg-accent hover:text-accent-foreground rounded-sm"
+                          >
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                              <span className="text-lg flex-shrink-0">
+                                {city.flag}
+                              </span>
+                              <div className="flex-1 min-w-0">
+                                <div className="font-medium text-sm truncate">
+                                  {city.name}
+                                </div>
+                                <div className="text-xs text-muted-foreground truncate">
+                                  {city.country} • {formatTimeOffset(city.timezone)}
+                                </div>
                               </div>
                             </div>
-                            <Badge
-                              variant="outline"
-                              className="text-xs font-mono"
-                            >
-                              {city.countryCode}
-                            </Badge>
+                            {value?.id === city.id && (
+                              <CheckIcon className="h-4 w-4 ml-2 flex-shrink-0" />
+                            )}
                           </div>
-                          {value?.id === city.id && (
-                            <CheckIcon className="h-4 w-4 ml-2 flex-shrink-0" />
-                          )}
-                        </CommandItem>
-                      );
-                    })}
-                  </CommandGroup>
-                ))
-              )}
-            </CommandList>
-          </Command>
-        </PopoverContent>
+                        ))}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </Command>
+            </div>
+          </PopoverContent>
+        )}
       </Popover>
     </div>
   );

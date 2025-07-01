@@ -27,7 +27,6 @@ interface TimeCardProps {
   city: City;
   referenceTime?: DateTime;
   is24Hour?: boolean;
-  showSeconds?: boolean;
   isPinned?: boolean;
   onRemove?: () => void;
   onPin?: () => void;
@@ -41,7 +40,6 @@ const TimeCard: React.FC<TimeCardProps> = ({
   city,
   referenceTime,
   is24Hour = false,
-  showSeconds = false,
   isPinned = false,
   onRemove,
   onPin,
@@ -63,25 +61,20 @@ const TimeCard: React.FC<TimeCardProps> = ({
       return;
     }
 
-    // Real-time updates
+    // Real-time updates - always update every second for accuracy
     const interval = setInterval(
       () => {
         setCurrentTime(DateTime.now().setZone(city.timezone));
       },
-      showSeconds ? 1000 : 60000
+      1000
     );
 
     return () => clearInterval(interval);
-  }, [city.timezone, referenceTime, showSeconds]);
+  }, [city.timezone, referenceTime]);
 
   const formatTime = () => {
-    const format = is24Hour
-      ? showSeconds
-        ? "HH:mm:ss"
-        : "HH:mm"
-      : showSeconds
-      ? "h:mm:ss a"
-      : "h:mm a";
+    // Always show seconds for accuracy
+    const format = is24Hour ? "HH:mm:ss" : "h:mm:ss a";
     return currentTime.toFormat(format);
   };
 

@@ -12,7 +12,6 @@ export interface TimeSyncState {
 
   // UI State
   show24Hour: boolean;
-  showSeconds: boolean;
   theme: "light" | "dark" | "system";
   compactView: boolean;
 
@@ -35,7 +34,6 @@ export interface TimeSyncState {
   // Settings
   toggleRealTimeMode: () => void;
   toggle24Hour: () => void;
-  toggleSeconds: () => void;
   setTheme: (theme: "light" | "dark" | "system") => void;
   toggleCompactView: () => void;
 
@@ -59,7 +57,6 @@ const initialState = {
 
   // UI defaults
   show24Hour: false,
-  showSeconds: false,
   theme: "system" as const,
   compactView: false,
 };
@@ -129,8 +126,6 @@ export const useTimeSyncStore = create<TimeSyncState>()(
       toggleRealTimeMode: () =>
         set((state) => ({ realTimeMode: !state.realTimeMode })),
       toggle24Hour: () => set((state) => ({ show24Hour: !state.show24Hour })),
-      toggleSeconds: () =>
-        set((state) => ({ showSeconds: !state.showSeconds })),
       setTheme: (theme) => set({ theme }),
       toggleCompactView: () =>
         set((state) => ({ compactView: !state.compactView })),
@@ -278,7 +273,6 @@ export const useTimeSyncStore = create<TimeSyncState>()(
       partialize: (state) => ({
         pinnedCities: state.pinnedCities,
         show24Hour: state.show24Hour,
-        showSeconds: state.showSeconds,
         theme: state.theme,
         compactView: state.compactView,
       }),

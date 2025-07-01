@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -61,6 +62,7 @@ const Landing: React.FC = () => {
             <span className="text-2xl font-bold">TimeSync</span>
           </div>
           <div className="flex items-center space-x-4">
+            <ThemeToggle />
             <Button asChild>
               <Link to="/app">Try Now</Link>
             </Button>
@@ -97,7 +99,7 @@ const Landing: React.FC = () => {
               variant="secondary"
               className="px-4 py-2 text-sm font-medium"
             >
-              🧭 Create beautiful world clock widgets you can embed anywhere
+              ⚡ Convert time zones instantly and create beautiful embeddable widgets
             </Badge>
           </motion.div>
 
@@ -118,9 +120,9 @@ const Landing: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            Create stunning, embeddable world clock widgets with time zone
-            conversion, real-time updates, and calendar integration. Perfect for
-            blogs, Notion, and websites.
+            Convert time across zones instantly, create embeddable world clock widgets,
+            and schedule with precision. Perfect for remote teams, content creators,
+            and global coordination.
           </motion.p>
 
           <motion.div
@@ -134,7 +136,7 @@ const Landing: React.FC = () => {
               size="lg"
               className="group text-lg px-8 py-4 bg-gradient-to-r from-primary to-primary/90"
             >
-              <Link to="/converter" className="flex items-center space-x-2">
+              <Link to="/app" className="flex items-center space-x-2">
                 <Clock className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                 <span>Try Converter</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -147,11 +149,11 @@ const Landing: React.FC = () => {
               className="text-lg px-8 py-4"
             >
               <Link
-                to="/embed-generator"
+                to="/app"
                 className="flex items-center space-x-2"
               >
                 <Code className="h-5 w-5" />
-                <span>Generate Embed</span>
+                <span>Create Widget</span>
               </Link>
             </Button>
             <Button
@@ -289,8 +291,8 @@ const Landing: React.FC = () => {
             Everything you need for global time
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Powerful features designed for teams, content creators, and
-            developers
+            Powerful features designed for remote teams, content creators, and
+            global scheduling
           </p>
         </motion.div>
 
@@ -319,18 +321,22 @@ const Landing: React.FC = () => {
               ],
             },
             {
-              icon: Calendar,
-              title: "Calendar Export",
+              icon: Share2,
+              title: "Widget Creation",
               description:
-                "One-click export to Google Calendar, Outlook, or ICS files with timezone conversion",
-              features: ["Google Calendar", "Outlook", "ICS files"],
+                "Generate beautiful iframe widgets in multiple sizes with responsive design and themes",
+              features: [
+                "Multiple sizes",
+                "Light/Dark themes", 
+                "Responsive design",
+              ],
             },
             {
-              icon: Share2,
+              icon: Code,
               title: "Easy Sharing",
               description:
-                "Generate shareable links and embed codes for blogs, Notion, websites",
-              features: ["Shareable links", "Embed codes", "Social sharing"],
+                "Generate shareable links and embed codes for blogs, Notion, websites with one click",
+              features: ["Shareable links", "Embed codes", "Copy & paste"],
             },
             {
               icon: Monitor,
@@ -341,12 +347,13 @@ const Landing: React.FC = () => {
             },
             {
               icon: Sparkles,
-              title: "Beautiful Themes",
+              title: "Custom Time Input",
               description:
-                "Light and dark themes with customizable colors and layouts",
+                "Set specific dates and times for scheduling across time zones with precise control",
               features: [
-                "Light/Dark themes",
-                "Multiple layouts",
+                "Date/Time picker",
+                "Timezone aware",
+                "Schedule meetings",
               ],
             },
           ].map((feature, index) => (
