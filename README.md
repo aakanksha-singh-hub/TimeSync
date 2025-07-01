@@ -2,7 +2,10 @@
 
 A clean, focused world clock application with timezone conversion and embeddable widgets. Built for developers who need essential timezone features without bloat.
 
-[Live Demo](https://time-sync-sigma.vercel.app)
+## 📽️ Demo Video
+
+[![Watch the demo](https://img.youtube.com/vi/sVTSd1LP7gk/0.jpg)](https://youtu.be/sVTSd1LP7gk)
+
 
 ## 🌍 Core Features
 
